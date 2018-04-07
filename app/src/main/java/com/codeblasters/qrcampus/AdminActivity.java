@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.IDNA;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 
@@ -31,11 +37,18 @@ public class AdminActivity extends AppCompatActivity {
     private static final int GALLERY_INTENT = 2;
     private Uri mImageUri;
     private Button select_image;
+    int dd,mm,yy;
+
+    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+
+        storageReference = FirebaseStorage.getInstance().getReference("info");
+        databaseReference = FirebaseDatabase.getInstance().getReference("info");
 
         select_image = (Button) findViewById(R.id.btn_pick);
         dateView = (TextView) findViewById(R.id.textView3);
@@ -89,17 +102,19 @@ public class AdminActivity extends AppCompatActivity {
             // arg2 = month
             // arg3 = day
             showDate(arg1, arg2 + 1, arg3);
+            dd = day;
+            mm = month;
+            yy = year;
         }
     };
 
     private void showDate(int year, int month, int day) {
         dateView.setText(new StringBuilder().append(day).append("/")
                 .append(month).append("/").append(year));
+
     }
 
-    public void makeQR(View view) {
-        Toast.makeText(this, "QR Code GEenerating..", Toast.LENGTH_SHORT).show();
-    }
+
 
 
     //Check for Runtime Permissions for Storage Access
@@ -134,5 +149,17 @@ public class AdminActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), mImageUri.toString(), Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+
+
+
+    //submit button click
+    public void makeQR(View view) {
+        Toast.makeText(this, "QR Code GEenerating..", Toast.LENGTH_SHORT).show();
+
+        //taking data and make class object
+
+
     }
 }

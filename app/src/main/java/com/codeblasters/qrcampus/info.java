@@ -1,6 +1,7 @@
 package com.codeblasters.qrcampus;
 
 import android.media.Image;
+import android.net.Uri;
 
 import java.util.Date;
 
@@ -10,18 +11,19 @@ import java.util.Date;
 
 public class info {
     private String title;
-    private Image image;
-    private Date date;
+    private String imageUri;
+    private String date;
     private String info;
 
     public info() {
     }
 
-    public info(String title, Image image, Date date, String info) {
+    public info(String title, String imageUri, String date, String info) {
         this.title = title;
-        this.image = image;
+        this.imageUri = imageUri;
         this.date = date;
         this.info = info;
+
     }
 
     public String getTitle() {
@@ -33,20 +35,20 @@ public class info {
         this.title = title;
     }
 
-    public Image getImage() {
-        return image;
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     public String getInfo() {
