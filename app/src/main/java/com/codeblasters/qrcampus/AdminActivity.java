@@ -35,7 +35,6 @@ import java.util.Calendar;
 public class AdminActivity extends AppCompatActivity {
 
     private static final int READ_EXTERNAL_STORAGE = 0;
-    private DatePicker datePicker;
     private Calendar calendar;
     private TextView dateView;
     private int year, month, day;
@@ -43,7 +42,6 @@ public class AdminActivity extends AppCompatActivity {
     private static final int GALLERY_INTENT = 2;
     private Uri mImageUri;
     private Button select_image;
-    int dd, mm, yy;
     private EditText title_input;
     private EditText details;
     private ProgressBar mProgressBar;
@@ -72,6 +70,7 @@ public class AdminActivity extends AppCompatActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
+
 
         title_input = findViewById(R.id.title);
         details = findViewById(R.id.description);
@@ -123,9 +122,10 @@ public class AdminActivity extends AppCompatActivity {
             // arg2 = month
             // arg3 = day
             showDate(arg1, arg2 + 1, arg3);
-            dd = day;
-            mm = month;
-            yy = year;
+
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
         }
     };
 
@@ -176,7 +176,7 @@ public class AdminActivity extends AppCompatActivity {
         Toast.makeText(this, "QR Code GEenerating..", Toast.LENGTH_SHORT).show();
 
         //taking data and make class object
-          title_in = title_input.getText().toString().trim();
+        title_in = title_input.getText().toString().trim();
 
         details_input = details.getText().toString().trim();
         if (mUploadTask != null && mUploadTask.isInProgress()) {
@@ -208,7 +208,8 @@ public class AdminActivity extends AppCompatActivity {
                         }, 500);
 
                         Toast.makeText(AdminActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                        String date = dd + " / " + mm + " / " + yy;
+
+                        String date = dateView.getText().toString();
                         info upload = new info(title_in, taskSnapshot.getDownloadUrl().toString(), date, details_input);
                         String uploadId = databaseReference.push().getKey();
                         databaseReference.child(uploadId).setValue(upload);
