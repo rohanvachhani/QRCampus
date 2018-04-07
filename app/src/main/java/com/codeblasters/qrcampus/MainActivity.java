@@ -3,7 +3,7 @@ package com.codeblasters.qrcampus;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends WithMenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

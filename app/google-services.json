@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "923346416446",
+    "firebase_url": "https://qrcampus-def8b.firebaseio.com",
+    "project_id": "qrcampus-def8b",
+    "storage_bucket": "qrcampus-def8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923346416446:android:a6c607cc0ff9db3d",
+        "android_client_info": {
+          "package_name": "com.codeblasters.qrcampus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923346416446-dg4pq0h106qpmjmibo2b62etvj4bk7bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4qKxgCQA177Mqy83cf845Uvg7tnsjcmo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
