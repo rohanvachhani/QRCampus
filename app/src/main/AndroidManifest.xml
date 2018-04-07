@@ -29,6 +29,11 @@
             android:label="Reset password">
 
         </activity>
+        <activity
+            android:name=".AboutUs"
+            android:label="Contect Us">
+
+        </activity>
     </application>
 
 </manifest>
