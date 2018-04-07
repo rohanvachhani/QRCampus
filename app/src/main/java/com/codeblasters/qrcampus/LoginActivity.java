@@ -30,10 +30,10 @@ public class LoginActivity extends WithManuActivity {
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null) {
+       /* if (auth.getCurrentUser() != null) {
             this.startActivity(new Intent(this, MainActivity.class));
             finish();
-        }
+        }*/
 
         setContentView(R.layout.activity_login);
 

@@ -26,22 +26,16 @@ public class WithManuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.login:            //admin login
-                if (auth.getCurrentUser() != null) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    finish();
-                    return true;
-                }
-                break;
+            case R.id.login:        //admin login
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+                return true;
 
             case R.id.logout:
-                if (auth.getCurrentUser() != null) {
-                    auth.signOut();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    finish();
-                }
-                    break;
-
+                auth.signOut();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+                break;
            /* case R.id.delete_user:
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);

@@ -12,16 +12,16 @@
         <activity
             android:name=".LoginActivity"
             android:label="Login Activity">
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="QR code Scanner">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="QR code Scanner">
-
         </activity>
         <activity android:name=".WithManuActivity" />
         <activity
