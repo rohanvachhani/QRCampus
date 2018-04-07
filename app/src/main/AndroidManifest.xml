@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codeblasters.qrcampus">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
 
     <application
         android:allowBackup="true"
@@ -12,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="Login Activity"></activity>
+            android:label="Login Activity" />
         <activity
             android:name=".MainActivity"
             android:label="QR code Scanner">
@@ -25,11 +31,15 @@
         <activity android:name=".WithManuActivity" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:label="Reset password"></activity>
+            android:label="Reset password" />
         <activity
             android:name=".AboutUs"
-            android:label="Contect Us"></activity>
-        <activity android:name=".AdminActivity"></activity>
+            android:label="Contect Us" />
+        <activity android:name=".AdminActivity" />
+        <activity
+            android:name=".QrResult"
+            android:label="QR Code Result"></activity>
+        <activity android:name="me.ydcool.lib.qrmodule.activity.QrScannerActivity" />
     </application>
 
 </manifest>
