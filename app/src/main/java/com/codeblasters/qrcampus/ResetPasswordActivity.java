@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by Rohan on 4/7/2018.
  */
 
-public class ResetPasswordActivity extends WithMenuActivity {
+public class ResetPasswordActivity extends WithManuActivity{
 
     private EditText e_email;
     private FirebaseAuth auth;

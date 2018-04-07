@@ -9,15 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="QR code Scanner">
+
+        </activity>
         <activity android:name=".WithManuActivity" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:label="Reset password">
+
+        </activity>
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends WithMenuActivity {
+public class LoginActivity extends WithManuActivity {
 
     private EditText e_email, e_pass;
     private FirebaseAuth auth;
@@ -31,7 +31,7 @@ public class LoginActivity extends WithMenuActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            this.startActivity(new Intent(this, LoginActivity.class));
+            this.startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 

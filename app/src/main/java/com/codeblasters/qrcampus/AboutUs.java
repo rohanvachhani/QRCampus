@@ -7,7 +7,7 @@ import android.view.Display;
 
 //import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class AboutUs extends WithMenuActivity {
+public class AboutUs extends WithManuActivity{
 
 
     /*for differnt font
@@ -19,7 +19,7 @@ public class AboutUs extends WithMenuActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, Display.class));
+       // startActivity(new Intent(this, Display.class));
     }
 
     @Override

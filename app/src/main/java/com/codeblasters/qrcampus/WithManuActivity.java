@@ -1,27 +1,21 @@
 package com.codeblasters.qrcampus;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.codeblasters.qrcampus.AboutUs;
-import com.codeblasters.qrcampus.LoginActivity;
-import com.codeblasters.qrcampus.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class WithMenuActivity extends AppCompatActivity {
+/**
+ * Created by Rohan on 4/7/2018.
+ */
 
+public class WithManuActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    ;
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -32,8 +26,8 @@ public class WithMenuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.display:
-                startActivity(new Intent(getApplicationContext(), com.rohan.test.Display.class));
+            case R.id.login:
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
                 return true;
 
@@ -42,7 +36,7 @@ public class WithMenuActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
                 break;
-            case R.id.delete_user:
+           /* case R.id.delete_user:
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 
@@ -85,7 +79,7 @@ public class WithMenuActivity extends AppCompatActivity {
 
                 AlertDialog alert = builder1.create();
                 alert.show();
-                break;
+                break;*/
 
             /*case R.id.delete_database:
                 final DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -122,10 +116,10 @@ public class WithMenuActivity extends AppCompatActivity {
                 break;
                 */
 
-            case R.id.user:
+           /* case R.id.user:
                 startActivity(new Intent(getApplicationContext(), expense.class));
                 finish();
-                break;
+                break;*/
             case R.id.about_us:
                 startActivity(new Intent(getApplicationContext(), AboutUs.class));
                 finish();
@@ -136,4 +130,3 @@ public class WithMenuActivity extends AppCompatActivity {
         return false;
     }
 }
-
