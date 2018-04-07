@@ -5,23 +5,30 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.IDNA;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.Calendar;
 
@@ -32,15 +39,22 @@ public class AdminActivity extends AppCompatActivity {
     private Calendar calendar;
     private TextView dateView;
     private int year, month, day;
-    private final int FILE_SELECT_CODE = 42;
-    private String selectedImagePath;
+
     private static final int GALLERY_INTENT = 2;
     private Uri mImageUri;
     private Button select_image;
-    int dd,mm,yy;
+    int dd, mm, yy;
+    private EditText title_input;
+    private EditText details;
+    private ProgressBar mProgressBar;
 
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private StorageTask mUploadTask;
+
+    String title_in;
+    String details_input;
+    String QR_gen_string = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +73,25 @@ public class AdminActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
         showDate(year, month + 1, day);
 
+        title_input = findViewById(R.id.title);
+        details = findViewById(R.id.description);
+        mProgressBar = findViewById(R.id.progress_bar);
+        storageReference = FirebaseStorage.getInstance().getReference("info");
+        databaseReference = FirebaseDatabase.getInstance().getReference("info");
+
+
         select_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Check for Runtime Permission
                 if (
-                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                        !=PackageManager.PERMISSION_GRANTED){
+                        ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                                != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Call for Permission", Toast.LENGTH_SHORT).show();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_STORAGE);
                     }
-                } else{
+                } else {
                     callgalary();
                 }
             }
@@ -115,8 +136,6 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-
-
     //Check for Runtime Permissions for Storage Access
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -152,14 +171,63 @@ public class AdminActivity extends AppCompatActivity {
     }
 
 
-
-
     //submit button click
     public void makeQR(View view) {
         Toast.makeText(this, "QR Code GEenerating..", Toast.LENGTH_SHORT).show();
 
         //taking data and make class object
+          title_in = title_input.getText().toString().trim();
 
+        details_input = details.getText().toString().trim();
+        if (mUploadTask != null && mUploadTask.isInProgress()) {
+            Toast.makeText(this, "Uploading is in progress", Toast.LENGTH_LONG).show();
+        } else {
+            if (title_in != "") {
+                upload_file();
+            } else {
+                Toast.makeText(this, "Please ADD Atleast a title of event or information", Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+    }
+
+    private void upload_file() {
+        StorageReference filereference = storageReference.child(System.currentTimeMillis() + ".jpg");
+
+        mUploadTask = filereference.putFile(mImageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mProgressBar.setProgress(0);
+                            }
+                        }, 500);
+
+                        Toast.makeText(AdminActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                        String date = dd + " / " + mm + " / " + yy;
+                        info upload = new info(title_in, taskSnapshot.getDownloadUrl().toString(), date, details_input);
+                        String uploadId = databaseReference.push().getKey();
+                        databaseReference.child(uploadId).setValue(upload);
+                        QR_gen_string = uploadId.toString();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(AdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                        mProgressBar.setProgress((int) progress);
+                    }
+                });
 
     }
 }
