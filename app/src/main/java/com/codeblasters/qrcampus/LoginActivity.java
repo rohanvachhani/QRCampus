@@ -92,7 +92,7 @@ public class LoginActivity extends WithManuActivity {
                                 Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
                             startActivity(intent);
                             finish();
                         }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codeblasters.qrcampus">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="Login Activity">
-
-        </activity>
+            android:label="Login Activity"></activity>
         <activity
             android:name=".MainActivity"
             android:label="QR code Scanner">
@@ -26,14 +25,11 @@
         <activity android:name=".WithManuActivity" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:label="Reset password">
-
-        </activity>
+            android:label="Reset password"></activity>
         <activity
             android:name=".AboutUs"
-            android:label="Contect Us">
-
-        </activity>
+            android:label="Contect Us"></activity>
+        <activity android:name=".AdminActivity"></activity>
     </application>
 
 </manifest>
