@@ -30,10 +30,10 @@ public class LoginActivity extends WithManuActivity {
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
-       /* if (auth.getCurrentUser() != null) {
-            this.startActivity(new Intent(this, MainActivity.class));
+       if (auth.getCurrentUser() != null) {
+            this.startActivity(new Intent(this, AdminActivity.class));
             finish();
-        }*/
+        }
 
         setContentView(R.layout.activity_login);
 
@@ -100,5 +100,12 @@ public class LoginActivity extends WithManuActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

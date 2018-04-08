@@ -1,13 +1,11 @@
 package com.codeblasters.qrcampus;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Display;
 
 //import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class AboutUs extends WithManuActivity{
+public class AboutUs extends WithManuActivity {
 
 
     /*for differnt font
@@ -19,7 +17,8 @@ public class AboutUs extends WithManuActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-       // startActivity(new Intent(this, Display.class));
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
@@ -29,4 +28,6 @@ public class AboutUs extends WithManuActivity{
 
 
     }
+
+
 }

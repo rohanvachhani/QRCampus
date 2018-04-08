@@ -1,6 +1,7 @@
 package com.codeblasters.qrcampus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -79,6 +80,13 @@ public class ResetPasswordActivity extends WithManuActivity{
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 }
 

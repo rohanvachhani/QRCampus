@@ -1,6 +1,5 @@
 package com.codeblasters.qrcampus;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -8,6 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import me.ydcool.lib.qrmodule.activity.QrScannerActivity;
 
 /**
  * Created by Rohan on 4/7/2018.
@@ -26,10 +27,10 @@ public class WithManuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.login:        //admin login
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            case R.id.home:        //admin login
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
-                return true;
+                break;
 
             case R.id.logout:
                 auth.signOut();
@@ -122,6 +123,10 @@ public class WithManuActivity extends AppCompatActivity {
                 break;*/
             case R.id.about_us:
                 startActivity(new Intent(getApplicationContext(), AboutUs.class));
+                finish();
+                break;
+            case R.id.ScanQR:
+                startActivity(new Intent(getApplicationContext(), QrScannerActivity.class));
                 finish();
                 break;
             default:

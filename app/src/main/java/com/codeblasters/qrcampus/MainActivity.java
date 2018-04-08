@@ -2,6 +2,7 @@ package com.codeblasters.qrcampus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import me.ydcool.lib.qrmodule.activity.QrScannerActivity;
@@ -13,8 +14,6 @@ public class MainActivity extends WithManuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(MainActivity.this, QrScannerActivity.class);
-        startActivityForResult(intent, QrScannerActivity.QR_REQUEST_CODE);
 
     }
 
@@ -33,5 +32,17 @@ public class MainActivity extends WithManuActivity {
                 Toast.makeText(getApplicationContext(), "Scanned Nothing!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void admin_redirect(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
+    public void user_redirect(View view) {
+        Intent intent = new Intent(MainActivity.this, QrScannerActivity.class);
+        startActivityForResult(intent, QrScannerActivity.QR_REQUEST_CODE);
+        finish();
+
     }
 }

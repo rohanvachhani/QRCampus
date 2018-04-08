@@ -14,7 +14,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -40,11 +39,10 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Calendar;
-import java.util.Random;
 
 import me.ydcool.lib.qrmodule.encoding.QrGenerator;
 
-public class AdminActivity extends AppCompatActivity {
+public class AdminActivity extends WithManuActivity {
 
     private static final int READ_EXTERNAL_STORAGE = 0;
     private Calendar calendar;
@@ -309,10 +307,10 @@ public class AdminActivity extends AppCompatActivity {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/req_images");
         myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "Image-" + n + ".jpg";
+        //Random generator = new Random();
+        // int n = 10000;
+        //n = generator.nextInt(n);
+        String fname = title_in + "_" + System.currentTimeMillis() + ".jpg";
         Toast.makeText(this, myDir.toString(), Toast.LENGTH_SHORT).show();
         File file = new File(myDir, fname);
         // Log.i(TAG, "" + file);
@@ -330,5 +328,12 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 
 }

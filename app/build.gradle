@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    }
+
 }
 
 dependencies {
@@ -33,6 +37,8 @@ dependencies {
     compile 'me.ydcool.lib:qrmodule:latest.integration'
 
     compile 'com.android.support:design:26.1.0'
+    //adding glid library
+    implementation 'com.squareup.picasso:picasso:2.6.0-SNAPSHOT'
 
 }
 apply plugin: 'com.google.gms.google-services'

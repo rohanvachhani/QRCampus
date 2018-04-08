@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 public class QrResult extends WithManuActivity {
 
@@ -30,7 +31,7 @@ public class QrResult extends WithManuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_result);
-        imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.img_view_disaply);
         title = findViewById(R.id.title);
         date = findViewById(R.id.date);
         details = findViewById(R.id.details);
@@ -52,13 +53,12 @@ public class QrResult extends WithManuActivity {
                    /* Toast.makeText(getApplicationContext(),"getting the data...",Toast.LENGTH_SHORT).show();*/
 
                 String img_url = dataSnapshot.child("imageUri").getValue(String.class);
-                if(img_url.equals("no Image")){
+                if (img_url.equals("no Image")) {
                     imguri = Uri.parse("android.resources://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.no_image);
                     imageView.setImageURI(imguri);
-                }
-                else{
+                } else {
                     img_url = dataSnapshot.child("imageUri").getValue(String.class);
-                   // Glide.with(getApplicationContext()).load(img_url).into(imageView);
+                    Picasso.with(getApplicationContext()).load(img_url).into(imageView);
 
                 }
                 String title_ii = dataSnapshot.child("title").getValue(String.class);
@@ -84,5 +84,12 @@ public class QrResult extends WithManuActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }

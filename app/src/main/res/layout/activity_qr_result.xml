@@ -11,17 +11,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/img_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_view_disaply"
+            android:layout_width="500px"
+            android:layout_height="500px"
+            android:layout_gravity="center_horizontal" />
 
 
         <android.support.design.widget.TextInputLayout

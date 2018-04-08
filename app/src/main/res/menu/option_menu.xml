@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/login"
+        android:id="@+id/home"
         android:orderInCategory="1"
-        android:title="Admin Login"
+        android:title="Home"
         app:showAsAction="never" />
 
     <item
@@ -23,5 +23,10 @@
         android:id="@+id/about_us"
         android:orderInCategory="3"
         android:title="About us"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/ScanQR"
+        android:orderInCategory="3"
+        android:title="Scan QR"
         app:showAsAction="never" />
 </menu>
