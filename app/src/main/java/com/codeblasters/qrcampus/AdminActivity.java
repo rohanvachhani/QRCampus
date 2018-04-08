@@ -3,10 +3,8 @@ package com.codeblasters.qrcampus;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -75,6 +73,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        mImageUri = Uri.parse("android.resources://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.no_image);
 
         storageReference = FirebaseStorage.getInstance().getReference("info");
         databaseReference = FirebaseDatabase.getInstance().getReference("info");
@@ -110,7 +109,9 @@ public class AdminActivity extends AppCompatActivity {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_STORAGE);
                     }
                 } else {
+
                     callgalary();
+
                 }
             }
         });
@@ -162,6 +163,7 @@ public class AdminActivity extends AppCompatActivity {
         switch (requestCode) {
             case READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+
                     callgalary();
                 return;
         }
@@ -170,9 +172,8 @@ public class AdminActivity extends AppCompatActivity {
 
     //If Access Granted gallery Will open
     private void callgalary() {
-        Resources res = getApplicationContext().getResources();
 
-        mImageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + res.getResourcePackageName(R.drawable.ic_launcher_background) + '/' + getResources().getResourceTypeName(R.drawable.no_image));
+        //mImageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + res.getResourcePackageName(R.drawable.ic_launcher_background) + '/' + getResources().getResourceTypeName(R.drawable.no_image));
         ;//bu default image (when user doesn't upload image)
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -226,7 +227,7 @@ public class AdminActivity extends AppCompatActivity {
     private void upload_file() {
         StorageReference filereference = storageReference.child(System.currentTimeMillis() + ".jpg");
 
-        Toast.makeText(this, "mImagUri : " + mImageUri.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "mImagUri : " + mImageUri.toString(), Toast.LENGTH_LONG).show();
         mUploadTask = filereference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -242,10 +243,8 @@ public class AdminActivity extends AppCompatActivity {
 
                 String date = dateView.getText().toString();
                 String imge = taskSnapshot.getDownloadUrl().toString();
-                if (mImageUri == null) {
-                    Toast.makeText(getApplicationContext(), "Image URI inull", Toast.LENGTH_SHORT).show();
 
-                }
+
                 info upload = new info(title_in, imge, date, details_input);
                 String uploadId = databaseReference.push().getKey();
                 databaseReference.child(uploadId).setValue(upload);
@@ -315,9 +314,7 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
-    public void bmToJpg(Bitmap qrCode) {
 
-    }
 
 
 }
