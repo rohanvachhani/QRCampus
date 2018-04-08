@@ -3,6 +3,7 @@ package com.codeblasters.qrcampus;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -197,11 +198,10 @@ public class AdminActivity extends WithManuActivity {
 
     //submit button click
     public void makeQR(View view) {
-        try {
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-        } catch (Exception e) {
-            // TODO: handle exception
+        View v = this.getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         }
         Toast.makeText(this, "QR Code GEenerating..", Toast.LENGTH_SHORT).show();
 

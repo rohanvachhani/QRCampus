@@ -42,7 +42,7 @@ public class MainActivity extends WithManuActivity {
     public void user_redirect(View view) {
         Intent intent = new Intent(MainActivity.this, QrScannerActivity.class);
         startActivityForResult(intent, QrScannerActivity.QR_REQUEST_CODE);
-        finish();
+
 
     }
 }
